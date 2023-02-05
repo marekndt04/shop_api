@@ -1,1 +1,7 @@
 .env
+.devcontainer
+.devcontainer/*
+
+.pytest_cache/
+
+tmp

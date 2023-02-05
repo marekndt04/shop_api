@@ -2,6 +2,6 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/healthcheck")
 def read_root():
-    return {"Hello": "World"}
+    return {}
