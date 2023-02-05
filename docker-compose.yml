@@ -5,19 +5,22 @@ services:
       context: .
       dockerfile: ./docker/local/Dockerfile
     image: fastapi-web
+    container_name: fastapi-web
+    env_file:
+      - .env
     depends_on:
       - mongo
     volumes:
       - .:/app
     ports:
       - 8000:8000
-    command: uvicorn app.main:app --host 0.0.0.0
+    command: uvicorn src.main:app --host 0.0.0.0
 
   mongo:
     image: mongo:latest
     container_name: mongo
     env_file:
-      - ./.env
+      - .env
     environment:
       MONGO_USERNAME: ${MONGO_USERNAME}
       MONGO_PASSWORD: ${MONGO_PASSWORD}
