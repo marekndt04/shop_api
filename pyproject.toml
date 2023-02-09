@@ -1,7 +1,9 @@
 [tool.mypy]
 mypy_path = "src"
-ignore_missing_imports = true
 strict = true
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
 
 [tool.black]
 line-length = 100
