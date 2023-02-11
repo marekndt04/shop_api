@@ -11,3 +11,7 @@ line-length = 100
 
 [tool.isort]
 profile = "black"
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/**", "**/__init__.py", "src/config.py"]
