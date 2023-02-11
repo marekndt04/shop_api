@@ -25,7 +25,7 @@ RUN pip install --no-cache-dir -r local.txt
 COPY . .
 
 # Make script for tests executable
-RUN chmod +x test.sh
+RUN chmod +x run_tests.sh
 
 # Set the environment variable for the application entry point
 ENV PYTHONUNBUFFERED 1
