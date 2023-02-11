@@ -7,7 +7,7 @@ class AppSettings(BaseSettings):
     MONGO_DATABASE: str
 
     class Config:
-        env_file = "./.env"
+        env_file = ".env"
 
 
 app_settings = AppSettings()
