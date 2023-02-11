@@ -1,6 +1,8 @@
 -r base.in
 
-pytest
-mypy
 black
+coverage
+flake8
 isort
+mypy
+pytest
