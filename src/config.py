@@ -5,6 +5,7 @@ class AppSettings(BaseSettings):
     MONGO_USERNAME: str
     MONGO_PASSWORD: str
     MONGO_DATABASE: str
+    MONGODB_URL: str
 
     class Config:
         env_file = ".env"
