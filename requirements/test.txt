@@ -46,6 +46,8 @@ isort==5.12.0
     # via -r requirements/test.in
 mccabe==0.7.0
     # via flake8
+motor==3.1.1
+    # via -r requirements/base.in
 mypy==1.0.0
     # via -r requirements/test.in
 mypy-extensions==1.0.0
@@ -71,7 +73,7 @@ pydantic[dotenv]==1.10.4
 pyflakes==3.0.1
     # via flake8
 pymongo==4.3.3
-    # via -r requirements/base.in
+    # via motor
 pytest==7.2.1
     # via -r requirements/test.in
 python-dotenv==0.21.1
