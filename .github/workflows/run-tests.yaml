@@ -5,10 +5,10 @@ on: push
 jobs:
   run-tests:
     runs-on: ubuntu-latest
-      strategy:
-        max-parallel: 4
-        matrix:
-          python-version: ["3.11"]
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: ["3.11"]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
