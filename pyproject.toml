@@ -1,10 +1,9 @@
 [tool.mypy]
 exclude = ["tests", ".tests"]
+ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "tests.*"
-ignore_errors = true
-ignore_missing_imports = true
 
 [tool.black]
 line-length = 100
