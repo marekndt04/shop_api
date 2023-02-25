@@ -1,3 +1,8 @@
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
 [tool.mypy]
 exclude = ["tests", ".tests"]
 ignore_missing_imports = true
