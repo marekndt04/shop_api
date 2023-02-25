@@ -1,6 +1,6 @@
 #!/bin/bash
 
 # Run pytest
-coverage run -m pytest
+coverage run -m pytest -rf
 flake8
 coverage report

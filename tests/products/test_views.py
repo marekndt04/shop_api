@@ -17,7 +17,7 @@ class TestProductsViews:
         cls.monkeypatch = monkeypatch
 
     def test_view_returns_https_ok_response(self):
-        response = self.client.get("/products")
+        response = self.client.get("/products/")
 
         assert response.status_code == http.HTTPStatus.OK
 
@@ -79,7 +79,8 @@ class TestProductsViews:
             "price": 11.0,
             "quantity": 2,
         }
-        response = self.client.post("/products/", data=body)
+        self.monkeypatch.setattr(views, "products_collection", MongoDbCollectionMock())
+        response = self.client.post("/products/", json=body)
 
         assert response.status_code == http.HTTPStatus.CREATED
 
@@ -90,11 +91,12 @@ class TestProductsViews:
             "price": 11.0,
             "quantity": 2,
         }
-        response = self.client.post("/products/", data=body)
+        self.monkeypatch.setattr(views, "products_collection", MongoDbCollectionMock())
+        response = self.client.post("/products/", json=body)
 
-        assert response.json() == {"message": "product created successfully", "body": body}
+        assert response.json() == {"message": "Created", "body": body}
 
-    @mock.patch("src.products.views.products_collection")
+    @mock.patch("src.products.views.products_collection", new_callable=mock.AsyncMock)
     def test_view_calls_insert_one_with_correct_arguments(self, products_collection_mock):
         body = {
             "name": "Product 1",
@@ -102,7 +104,7 @@ class TestProductsViews:
             "price": 11.0,
             "quantity": 2,
         }
-        self.client.post("/products/", data=body)
+        self.client.post("/products/", json=body)
 
         assert products_collection_mock.insert_one.call_args == ((body,),)
 
@@ -112,16 +114,7 @@ class TestProductsViews:
             "description": "Product 1 description",
             "price": 11.0,
         }
-        response = self.client.post("/products/", data=body)
+        self.monkeypatch.setattr(views, "products_collection", MongoDbCollectionMock())
+        response = self.client.post("/products/", json=body)
 
-        assert response.status_code == http.HTTPStatus.BAD_REQUEST
-
-    def test_view_returns_correct_message_for_post_request_with_incorrect_body(self):
-        body = {
-            "name": "Product 1",
-            "description": "Product 1 description",
-            "price": 11.0,
-        }
-        response = self.client.post("/products/", data=body)
-
-        assert response.json() == {"message": "missing required fields: quantity"}
+        assert response.status_code == http.HTTPStatus.UNPROCESSABLE_ENTITY
