@@ -3,14 +3,12 @@ from typing import List
 
 from fastapi import APIRouter, Response
 from fastapi.responses import JSONResponse
+from pymongo.errors import DuplicateKeyError
 
-from src.products.models import HttpCreatedBody, Product
-
-from ..database import db
+from src.database import products_collection
+from src.products.models import HttpConflictBody, HttpCreatedBody, Product
 
 router = APIRouter()
-
-products_collection = db.get_collection("products_collection")
 
 
 @router.get("/products/")
@@ -24,8 +22,15 @@ async def get_products() -> List[Product]:
 @router.post("/products/")
 async def create_products(product: Product) -> Response:
     product_dict = product.dict()
-    await products_collection.insert_one(product.dict())
-    return JSONResponse(
-        status_code=http.HTTPStatus.CREATED,
-        content=HttpCreatedBody(body=product_dict).dict(),
-    )
+
+    try:
+        await products_collection.insert_one(product.dict())
+    except DuplicateKeyError:
+        status_code = http.HTTPStatus.CONFLICT
+        description = f"product with name '{product_dict['name']}' already exists"
+        content = HttpConflictBody(body=description).dict()
+    else:
+        status_code = http.HTTPStatus.CREATED
+        content = HttpCreatedBody(body=product_dict).dict()
+
+    return JSONResponse(status_code=status_code, content=content)

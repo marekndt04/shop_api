@@ -17,6 +17,7 @@ class TestProductsViews:
         cls.monkeypatch = monkeypatch
 
     def test_view_returns_https_ok_response(self):
+        self.monkeypatch.setattr(views, "products_collection", MongoDbCollectionMock([]))
         response = self.client.get("/products/")
 
         assert response.status_code == http.HTTPStatus.OK
@@ -118,3 +119,38 @@ class TestProductsViews:
         response = self.client.post("/products/", json=body)
 
         assert response.status_code == http.HTTPStatus.UNPROCESSABLE_ENTITY
+
+    def test_view_returns_http_conflict_status_for_post_request_with_duplicate_name(self):
+        body = {
+            "name": "Product 1",
+            "description": "Product 1 description",
+            "price": 11.0,
+            "quantity": 2,
+        }
+        self.monkeypatch.setattr(
+            views,
+            "products_collection",
+            MongoDbCollectionMock(duplicate_key_error=True),
+        )
+        response = self.client.post("/products/", json=body)
+
+        assert response.status_code == http.HTTPStatus.CONFLICT
+
+    def test_view_returns_correct_message_for_post_request_with_duplicate_name(self):
+        body = {
+            "name": "Product 1",
+            "description": "Product 1 description",
+            "price": 11.0,
+            "quantity": 2,
+        }
+        self.monkeypatch.setattr(
+            views,
+            "products_collection",
+            MongoDbCollectionMock(duplicate_key_error=True),
+        )
+        response = self.client.post("/products/", json=body)
+
+        assert response.json() == {
+            "message": "Duplicated",
+            "body": "product with name 'Product 1' already exists",
+        }

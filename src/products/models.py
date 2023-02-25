@@ -31,3 +31,8 @@ class HttpCreatedBody(BaseModel):
                 "body": Product.schema()["example"],
             }
         }
+
+
+class HttpConflictBody(BaseModel):
+    message: Optional[str] = "Duplicated"
+    body: str
