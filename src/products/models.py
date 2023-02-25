@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import BaseModel
 
 
@@ -18,21 +16,3 @@ class Product(BaseModel):
                 "quantity": "666",
             }
         }
-
-
-class HttpCreatedBody(BaseModel):
-    message: Optional[str] = "Created"
-    body: Product
-
-    class Config:
-        schema_extra = {
-            "example": {
-                "message": "OK",
-                "body": Product.schema()["example"],
-            }
-        }
-
-
-class HttpConflictBody(BaseModel):
-    message: Optional[str] = "Duplicated"
-    body: str

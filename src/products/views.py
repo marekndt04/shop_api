@@ -5,12 +5,11 @@ from fastapi import APIRouter, Response
 from fastapi.responses import JSONResponse
 from pymongo.errors import DuplicateKeyError
 
-from src.database import db
-from src.products.models import HttpConflictBody, HttpCreatedBody, Product
+from ..database import db
+from ..response_messages import HttpConflictBody, HttpCreatedBody
+from .models import Product
 
 router = APIRouter()
-
-
 products_collection = db["products_collection"]
 
 
