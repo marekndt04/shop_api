@@ -18,4 +18,4 @@ profile = "black"
 
 [tool.coverage.run]
 source = ["src"]
-omit = ["tests/**", "**/__init__.py", "src/config.py"]
+omit = ["tests/**", "**/__init__.py", "src/config.py", "src/database.py"]

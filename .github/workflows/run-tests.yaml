@@ -31,3 +31,4 @@ jobs:
         run: |
           coverage run -m pytest -rf
           flake8
+          coverage report --fail-under=100
