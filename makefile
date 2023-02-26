@@ -2,7 +2,7 @@ build:
 	docker-compose build
 
 run:
-	docker-compose run --rm web
+	docker-compose run --rm --service-ports web
 
 compile_reqs:
 	docker-compose run --rm web pip-compile requirements/base.in
