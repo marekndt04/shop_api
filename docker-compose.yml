@@ -14,7 +14,7 @@ services:
       - .:/app
     ports:
       - 8000:8000
-    command: uvicorn src.main:app --host 0.0.0.0
+    command: uvicorn src.main:app --host 0.0.0.0 --reload
 
   mongo:
     image: mongo:latest
