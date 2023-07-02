@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "shop_api.fullname" . }}
+  name: {{ .Values.serviceName }}
   labels:
-    {{- include "shop_api.labels" . | nindent 4 }}
+    app: {{ .Values.serviceLabel }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.serviceType }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.servicePort }}
       targetPort: http
       protocol: TCP
       name: http
   selector:
-    {{- include "shop_api.selectorLabels" . | nindent 4 }}
+    app: {{ .Values.serviceLabel }}
