@@ -11,7 +11,7 @@ replicaCount: 1
 serviceType: ClusterIP
 servicePort: 80
 serviceName: shop-api-service
-serviceLabel: shop-api-label
+serviceLabel: shop-service-label
 
 # ingress:
 #   enabled: false

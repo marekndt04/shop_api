@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/local/Dockerfile
-    image: fastapi-web
+    image: shop-api
     container_name: fastapi-web
     env_file:
       - .env
