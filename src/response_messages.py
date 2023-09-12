@@ -10,10 +10,10 @@ class HttpCreatedBody(BaseModel):
     body: Product
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "message": "OK",
-                "body": Product.schema()["example"],
+                "body": Product.model_json_schema()["example"],
             }
         }
 

@@ -8,7 +8,7 @@ class Product(BaseModel):
     quantity: int
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "name": "New product",
                 "description": "Some description",
