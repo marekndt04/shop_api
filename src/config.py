@@ -2,7 +2,6 @@ from pydantic import validator
 from pydantic_settings import BaseSettings
 
 
-
 class AppSettings(BaseSettings):
     MONGO_USERNAME: str
     MONGO_PASSWORD: str

@@ -12,4 +12,6 @@ db = mongo_client[app_settings.MONGO_DATABASE]
 
 def setup_collections() -> None:
     products_collection = db["products_collection"]
-    products_collection.create_index("name", unique=True)
+    # Below line is ingored because mypy throws [coroutine-unused] error, while this
+    # function is passed to FastAPI as a argument to startup event handler.
+    products_collection.create_index("name", unique=True)  # type: ignore

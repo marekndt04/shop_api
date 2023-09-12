@@ -4,8 +4,12 @@ filterwarnings = [
 ]
 
 [tool.mypy]
+plugins = [
+    "pydantic.mypy"
+]
 exclude = ["tests", ".tests"]
 ignore_missing_imports = true
+follow_imports = "silent"
 
 [[tool.mypy.overrides]]
 module = "tests.*"
