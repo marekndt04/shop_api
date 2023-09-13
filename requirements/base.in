@@ -1,6 +1,5 @@
 fastapi
 uvicorn
 pydantic
-pydantic[dotenv]
 pydantic-settings
 motor

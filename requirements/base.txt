@@ -22,7 +22,7 @@ idna==3.4
     # via anyio
 motor==3.3.1
     # via -r requirements/base.in
-pydantic[dotenv]==2.3.0
+pydantic==2.3.0
     # via
     #   -r requirements/base.in
     #   fastapi
