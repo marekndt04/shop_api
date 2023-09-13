@@ -1,0 +1,23 @@
+name: Push Tagged Commit Image
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t shop_api:latest .
+          docker tag shop_api:latest shop_api:${{ github.ref_name }}
+          docker push shop_api:${{ github.ref_name }}
