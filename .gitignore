@@ -1,6 +1,4 @@
 .env
-.devcontainer
-.devcontainer/*
 
 .idea
 .pytest_cache/

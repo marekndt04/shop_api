@@ -1,0 +1,20 @@
+{
+	"name": "FastAPI Web",
+	"dockerComposeFile": ["../docker-compose.yml", "docker-compose.extend.yml"],
+	"service": "web",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"ms-python.vscode-pylance",
+				"ms-python.python",
+				"emmanuelbeziat.vscode-great-icons",
+				"vscodevim.vim",
+				"github.copilot"
+			]
+		}
+	},
+	"shutdownAction": "stopCompose",
+	"remoteUser": "appuser"
+}
