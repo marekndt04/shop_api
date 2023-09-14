@@ -2,7 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.appName }}
-  labels: {{ .Values.appLabel }}
+  labels:
+    app: {{ .Values.appLabel }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -15,8 +16,7 @@ spec:
     spec:
       containers:
         - name: {{ .Values.appContainerName }}
-          image: shop-api:latest
-          imagePullPolicy: ifNotPresent
+          image: marendt04/shop_api:latest
           ports:
             - name: http
               containerPort: 80
@@ -29,3 +29,14 @@ spec:
             httpGet:
               path: /healthcheck
               port: http
+          env:
+            - name: MONGO_USERNAME
+              value: {{ .Values.mongodbUsername }}
+            - name: MONGO_PASSWORD
+              value: {{ .Values.mongodbPassword }}
+            - name: MONGO_HOST
+              value: {{ .Values.mongoServiceName }}
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_DB
+              value: {{ .Values.mongodbDatabase }} 

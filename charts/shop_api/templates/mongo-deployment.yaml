@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}-mongodb-deployment
+  labels:
+    app: {{ .Values.appName }}-mongodb
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}-mongodb
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}-mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:latest
+          ports:
+            - containerPort: {{ .Values.mongodbPort }}
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: {{ .Values.mongodbUsername }}
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: {{ .Values.mongodbPassword }}
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.mongodbPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 10

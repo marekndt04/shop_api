@@ -13,3 +13,18 @@ spec:
       name: http
   selector:
     app: {{ .Values.serviceLabel }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.appName }}-mongodb-service
+spec:
+  selector:
+    app: {{ .Values.appName }}-mongodb
+  ports:
+    - protocol: TCP
+      port: {{ .Values.mongoServicePort }}
+      targetPort: {{ .Values.mongodbPort }}
+  type: {{ .Values.mongoServiceType }}
