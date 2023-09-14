@@ -7,7 +7,7 @@ on:
 
 jobs:
   run-tests-and-linter:
-    extends: .github/workflows/common.yaml
+    uses: ./.github/workflows/common.yaml
 
   push_to_registry:
     name: Push Docker image to Docker Hub

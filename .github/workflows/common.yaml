@@ -1,5 +1,15 @@
 name: CI/CD Pipeline (Common)
 
+on:
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
 env:
   MONGO_USERNAME: fastapi
   MONGO_PASSWORD: pass123
