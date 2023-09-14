@@ -1,0 +1,10 @@
+name: CI/CD Pipeline (Branch Push)
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  run-tests-and-linter:
+    extends: .github/workflows/common.yml
