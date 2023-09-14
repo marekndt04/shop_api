@@ -7,4 +7,4 @@ on:
 
 jobs:
   run-tests-and-linter:
-    extends: .github/workflows/common.yml
+    extends: .github/workflows/common.yaml
