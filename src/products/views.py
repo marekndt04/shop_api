@@ -23,16 +23,16 @@ async def get_products() -> List[Product]:
 
 @router.post("/products/")
 async def create_products(product: Product) -> Response:
-    product_dict = product.dict()
+    product_dict = product.model_dump()
 
     try:
-        await products_collection.insert_one(product.dict())
+        await products_collection.insert_one(product_dict)
     except DuplicateKeyError:
         status_code = http.HTTPStatus.CONFLICT
         description = f"product with name '{product_dict['name']}' already exists"
-        content = HttpConflictBody(body=description).dict()
+        content = HttpConflictBody(body=description).model_dump()
     else:
         status_code = http.HTTPStatus.CREATED
-        content = HttpCreatedBody(body=product_dict).dict()
+        content = HttpCreatedBody(body=product_dict).model_dump()
 
     return JSONResponse(status_code=status_code, content=content)
