@@ -6,7 +6,7 @@ mongo_db_url = (
     f"mongodb://{app_settings.MONGO_USERNAME}:{app_settings.MONGO_PASSWORD}"
     f"@{app_settings.MONGO_HOST}:{app_settings.MONGO_PORT}"
 )
-mongo_client = motor_asyncio.AsyncIOMotorClient(mongo_db_url)
+mongo_client = motor_asyncio.AsyncIOMotorClient(mongo_db_url)  # type: ignore
 db = mongo_client[app_settings.MONGO_DATABASE]
 
 
