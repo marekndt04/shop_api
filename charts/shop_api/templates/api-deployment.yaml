@@ -35,7 +35,7 @@ spec:
             - name: MONGO_PASSWORD
               value: {{ .Values.mongodbPassword }}
             - name: MONGO_HOST
-              value: {{ .Values.mongoServiceName }}
+              value: {{ .Values.appName }}-mongodb-service
             - name: MONGO_PORT
               value: "{{ .Values.mongodbPort }}"
             - name: MONGO_DATABASE
