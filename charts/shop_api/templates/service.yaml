@@ -27,4 +27,5 @@ spec:
     - protocol: TCP
       port: {{ .Values.mongoServicePort }}
       targetPort: {{ .Values.mongodbPort }}
+      nodePort: 30000
   type: {{ .Values.mongoServiceType }}

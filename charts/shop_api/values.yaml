@@ -9,7 +9,7 @@ appContainerName: shop-api-container
 replicaCount: 1
 
 serviceType: ClusterIP
-servicePort: 80
+servicePort: "80"
 serviceName: shop-api-service
 serviceLabel: shop-service-label
 
@@ -18,8 +18,6 @@ mongodbPassword: mongodbpassword
 mongodbDatabase: mongodb
 mongodbPort: "27017"
 
-
-mongoServiceType: ClusterIP
+mongoServiceType: NodePort
 mongoServicePort: "27017"
-mongoServiceName: mongo-service
-mongoServiceLabel: mongo-service-label
+mongoServiceName: shop-api-deployment-mongodb-service

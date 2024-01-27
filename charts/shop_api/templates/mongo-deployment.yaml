@@ -15,8 +15,8 @@ spec:
         app: {{ .Values.appName }}-mongodb
     spec:
       containers:
-        - name: mongodb
-          image: mongo:latest
+        - name: mongodb-container
+          image: mongo
           ports:
             - containerPort: {{ .Values.mongodbPort }}
           env:
@@ -24,6 +24,8 @@ spec:
               value: {{ .Values.mongodbUsername }}
             - name: MONGO_INITDB_ROOT_PASSWORD
               value: {{ .Values.mongodbPassword }}
+            - name: MONGO_INITDB_DATABASE
+              value: {{ .Values.mongodbDatabase }}
           readinessProbe:
             tcpSocket:
               port: {{ .Values.mongodbPort }}
