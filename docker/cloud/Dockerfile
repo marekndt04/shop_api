@@ -26,3 +26,5 @@ COPY . .
 
 # Set the environment variable for the application entry point
 ENV PYTHONUNBUFFERED 1
+
+CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
