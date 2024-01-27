@@ -2,16 +2,13 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-appName: shop-api-deployment
-appLabel: shop-api-label
-appContainerName: shop-api-container
+appName: shop-api
 
 replicaCount: 1
 
-serviceType: ClusterIP
-servicePort: "80"
-serviceName: shop-api-service
-serviceLabel: shop-service-label
+serviceType: NodePort
+servicePort: "8000"
+nodePort: "30001"
 
 mongodbUsername: mongodbuser
 mongodbPassword: mongodbpassword
@@ -19,5 +16,4 @@ mongodbDatabase: mongodb
 mongodbPort: "27017"
 
 mongoServiceType: NodePort
-mongoServicePort: "27017"
-mongoServiceName: shop-api-deployment-mongodb-service
+mongoNodePort: "30000"

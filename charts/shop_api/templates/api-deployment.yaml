@@ -3,32 +3,32 @@ kind: Deployment
 metadata:
   name: {{ .Values.appName }}
   labels:
-    app: {{ .Values.appLabel }}
+    app: {{ .Values.appName }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.appLabel }}
+      app: {{ .Values.appName }}
   template:
     metadata:
       labels:
-        app: {{ .Values.appLabel }}
+        app: {{ .Values.appName }}
     spec:
       containers:
-        - name: {{ .Values.appContainerName }}
+        - name: {{ .Values.appName }}-container
           image: marendt04/shop_api:latest
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8000
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /healthcheck
-              port: 80
+              port: 8000
           readinessProbe:
             httpGet:
               path: /healthcheck
-              port: 80
+              port: 8000
           env:
             - name: MONGO_USERNAME
               value: {{ .Values.mongodbUsername }}
@@ -37,6 +37,6 @@ spec:
             - name: MONGO_HOST
               value: {{ .Values.mongoServiceName }}
             - name: MONGO_PORT
-              value: "27017"
+              value: "{{ .Values.mongodbPort }}"
             - name: MONGO_DATABASE
-              value: {{ .Values.mongodbDatabase }} 
+              value: {{ .Values.mongodbDatabase }}
