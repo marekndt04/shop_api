@@ -10,7 +10,6 @@ mongo_client = motor_asyncio.AsyncIOMotorClient(mongo_db_url)  # type: ignore
 db = mongo_client[app_settings.MONGO_DATABASE]
 
 
-# test change to trigger a comment
 def setup_collections() -> None:
     products_collection = db["products_collection"]
     # Below line is ingored because mypy throws [coroutine-unused] error, while this
